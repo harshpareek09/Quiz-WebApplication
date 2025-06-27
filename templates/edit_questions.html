@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&family=Inter:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #4b0f68;
+      --background: #f4f0f8;
+      --card: #ffffff;
+      --text: #2c2c2c;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      padding-bottom: 80px;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 20px;
+      font-family: 'Raleway', sans-serif;
+      box-shadow: 0 4px 12px var(--shadow);
+      flex-wrap: wrap;
+    }
+
+    .back-btn {
+      background: white;
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #e0d0f0;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px var(--shadow);
+      margin-bottom: 30px;
+      animation: slideUp 0.4s ease forwards;
+      opacity: 0;
+    }
+
+    .card h3 {
+      color: var(--primary);
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn.save {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn.save:hover {
+      background-color: #218838;
+    }
+
+    .btn.delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn.delete:hover {
+      background-color: #c82333;
+    }
+
+    .btn.add-new {
+      background-color: var(--primary);
+      color: white;
+      margin-top: 20px;
+    }
+
+    .btn.add-new:hover {
+      background-color: #370c4e;
+    }
+
+    .btn.finish {
+      background-color: #007bff;
+      color: white;
+      display: block;
+      margin: 40px auto 0;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 30px;
+    }
+
+    .btn.finish:hover {
+      background-color: #0056b3;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .container {
+        padding: 30px 20px;
+      }
+
+      .btn.finish {
+        width: 100%;
+      }
+
+      .button-group {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>📝 Edit Quiz Questions</div>
+    <button class="back-btn" onclick="window.history.back()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </header>
+
+  <div class="container" id="questionContainer">
+    Loading questions...
+  </div>
+
+  <div class="container">
+    <button class="btn add-new" onclick="addNewQuestionForm()">
+      <i class="fas fa-plus-circle"></i> Add New Question
+    </button>
+
+    <button class="btn finish" onclick="finalizeQuiz()">
+      <i class="fas fa-check-circle"></i> Finish Quiz
+    </button>
+  </div>
+
+  <script>
+    const quizId = "{{ quiz_id }}";
+    function finalizeQuiz() {
+      window.location.href = `/quiz-success/${quizId}`;
+    }
+  </script>
+
+  <script src="/static/js/edit_questions.js"></script>
+</body>
+</html>
