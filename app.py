@@ -61,13 +61,12 @@ def quiz_success(quiz_id):
     return render_template("quiz_success.html", quiz_id=quiz_id)
 
 # # Start Server
-if __name__ == '__main__':
-    print("\nStarting Flask server at http://127.0.0.1:5000/")
-    app.run(debug=True)
-
-# import os
-
 # if __name__ == '__main__':
-#     port = int(os.environ.get('PORT', 5000))
-#     print(f"Server running on http://0.0.0.0:{port}")
-#     app.run(host='0.0.0.0', port=port)
+#     print("\nStarting Flask server at http://127.0.0.1:5000/")
+#     app.run(debug=True)
+
+import os
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
