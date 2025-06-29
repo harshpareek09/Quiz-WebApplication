@@ -1,11 +1,11 @@
-// 👇 Called when the page loads
+// Called when the page loads
 window.onload = () => {
   loadQuestions();
 };
 
 const container = document.getElementById("questionContainer");
 
-// ✅ 1. Fetch and show all questions
+// 1. Fetch and show all questions
 async function loadQuestions() {
   try {
     const res = await fetch(`/teacher/questions/${quizId}`);
@@ -27,7 +27,7 @@ async function loadQuestions() {
   }
 }
 
-// ✅ 2. Render card for each question
+// 2. Render card for each question
 function renderQuestionCard(q) {
   const card = document.createElement("div");
   card.className = "card";
@@ -69,7 +69,7 @@ function renderQuestionCard(q) {
     </div>
   `;
 
-  // 👉 Save button handler
+  // Save button handler
   card.querySelector(".save").addEventListener("click", async () => {
     const payload = {
       question_text: card.querySelector(".question-text").value,
@@ -94,7 +94,7 @@ function renderQuestionCard(q) {
     }
   });
 
-  // 👉 Delete button handler
+  // Delete button handler
   card.querySelector(".delete").addEventListener("click", async () => {
     if (confirm("Are you sure you want to delete this question?")) {
       try {
@@ -114,7 +114,7 @@ function renderQuestionCard(q) {
   container.appendChild(card);
 }
 
-// ✅ 3. Add new question form
+// 3. Add new question form
 function addNewQuestionForm() {
   const blank = {
     question_id: null,

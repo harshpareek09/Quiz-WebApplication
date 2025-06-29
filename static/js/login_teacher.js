@@ -1,4 +1,4 @@
-console.log("✅ Teacher JS Loaded");
+console.log("Teacher JS Loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("teacherloginbtn");
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const card = document.getElementById("loginCard");
 
   if (!btn) {
-    console.error("❌ Teacher Login button not found");
+    console.error("Teacher Login button not found");
     return;
   }
 
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("password").value.trim();
 
     if (!teacherId || !full_name || !password) {
-      msg.textContent = "❗ All fields are required!";
+      msg.textContent = "All fields are required!";
       msg.style.color = "red";
       return;
     }
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
           card.innerHTML = `
-            <h2 style="color: lightgreen;">✅ Login Successful</h2>
+            <h2 style="color: lightgreen;">Login Successful</h2>
             <p style="margin-top: 15px; font-size: 16px;">Welcome, ${full_name}!</p>
           `;
           card.style.transition = "opacity 0.8s ease";
@@ -53,12 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 1500);
         }, 500);
       } else {
-        msg.textContent = result.message || "❌ Invalid login details!";
+        msg.textContent = result.message || "Invalid login details!";
         msg.style.color = "red";
       }
     } catch (error) {
-      console.error("❌ Error during login:", error);
-      msg.textContent = "⚠️ Server error. Please try again.";
+      console.error("Error during login:", error);
+      msg.textContent = "Server error. Please try again.";
       msg.style.color = "red";
     }
   });

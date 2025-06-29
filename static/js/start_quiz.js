@@ -1,4 +1,4 @@
-console.log("📘 start_quiz.js loaded");
+console.log("start_quiz.js loaded");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const quizArea = document.getElementById("questionArea");
@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const submitBtn = document.getElementById("submitQuizBtn");
 
   if (!quiz_id || !student_email) {
-    quizArea.innerHTML = "<p style='color: red;'>❌ Invalid quiz access.</p>";
+    quizArea.innerHTML = "<p style='color: red;'>Invalid quiz access.</p>";
     return;
   }
 
-  // 🚨 Cheating Detection
+  // Cheating Detection
   async function handleViolation(reason) {
-    console.warn("🚨 Cheating detected:", reason);
+    console.warn("Cheating detected:", reason);
     try {
       await fetch("/student/violation", {
         method: "POST",
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({ student_email, quiz_id })
       });
 
-      alert("🚨 Cheating Detected: " + reason + "\nQuiz auto-submitted with 0 marks.");
+      alert("Cheating Detected: " + reason + "\nQuiz auto-submitted with 0 marks.");
       window.location.href = `/student/view-result/${quiz_id}?email=${student_email}`;
 
     } catch (err) {
-      console.error("❌ Violation submission failed:", err);
+      console.error("Violation submission failed:", err);
     }
   }
 
@@ -57,14 +57,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     handleViolation("Notifications blocked");
   }
 
-  // ✅ Load Quiz Questions
+  // Load Quiz Questions
   try {
     const res = await fetch(`/student/quiz/${quiz_id}`);
     const data = await res.json();
     loader.remove();
 
     if (!data.success) {
-      quizArea.innerHTML = `<p style='color: red;'>❌ ${data.message}</p>`;
+      quizArea.innerHTML = `<p style='color: red;'>${data.message}</p>`;
       return;
     }
 
@@ -96,11 +96,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       quizArea.appendChild(box);
     });
   } catch (err) {
-    console.error("❌ Error loading questions:", err);
-    quizArea.innerHTML = `<p style='color: red;'>⚠️ Failed to load quiz.</p>`;
+    console.error("Error loading questions:", err);
+    quizArea.innerHTML = `<p style='color: red;'>Failed to load quiz.</p>`;
   }
 
-  // ✅ Submit Quiz
+  // Submit Quiz
   submitBtn.addEventListener("click", async () => {
     const answers = [];
     document.querySelectorAll(".question-box").forEach((box) => {
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     if (answers.length === 0 || answers.length !== document.querySelectorAll(".question-box").length) {
-      alert("❗ Please answer all questions before submitting.");
+      alert("Please answer all questions before submitting.");
       return;
     }
 
@@ -138,14 +138,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const result = await res.json();
       if (result.success) {
-        alert(`✅ Quiz submitted!\nScore: ${result.score}`);
+        alert(`Quiz submitted!\nScore: ${result.score}`);
         window.location.href = `/student/view-result/${quiz_id}?email=${student_email}`;
       } else {
-        alert("❌ Failed to submit quiz.");
+        alert("Failed to submit quiz.");
       }
     } catch (err) {
-      console.error("❌ Submission failed:", err);
-      alert("⚠️ Error occurred during submission.");
+      console.error("Submission failed:", err);
+      alert("Error occurred during submission.");
     }
   });
 });

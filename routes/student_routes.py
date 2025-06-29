@@ -3,12 +3,12 @@ from db_config import get_db_connection
 
 student_bp = Blueprint('student', __name__)
 
-# ✅ Shared Link → Student Login Page
+# Shared Link → Student Login Page
 @student_bp.route('/attempt-quiz/<int:quiz_id>', methods=['GET'])
 def attempt_quiz(quiz_id):
     return render_template('studentlogin.html', quiz_id=quiz_id)
 
-# ✅ Student Login + Redirect Handler
+# Student Login + Redirect Handler
 @student_bp.route('/login-quiz', methods=['POST'])
 def login_quiz():
     data = request.get_json()
@@ -43,19 +43,19 @@ def login_quiz():
         return jsonify({"status": "success"}), 200
 
     except Exception as e:
-        print("❌ Error:", e)
+        print("Error:", e)
         return jsonify({"status": "error", "message": "Internal server error"}), 500
 
     finally:
         cursor.close()
         conn.close()
 
-# ✅ Render Start Quiz Page
+# Render Start Quiz Page
 @student_bp.route('/start-quiz/<int:quiz_id>', methods=['GET'])
 def start_quiz(quiz_id):
     return render_template('start_quiz.html', quiz_id=quiz_id)
 
-# ✅ Get Questions
+# Get Questions
 @student_bp.route('/quiz/<int:quiz_id>', methods=['GET'])
 def get_quiz_questions(quiz_id):
     try:
@@ -72,7 +72,7 @@ def get_quiz_questions(quiz_id):
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
-# ✅ Save Response (FIXED)
+# Save Response (FIXED)
 @student_bp.route('/submit-response', methods=['POST'])
 def submit_response():
     data = request.get_json()
@@ -116,7 +116,7 @@ def submit_response():
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
-# ✅ Report Cheating
+# Report Cheating
 @student_bp.route('/violation', methods=['POST'])
 def report_violation():
     data = request.get_json()
@@ -141,7 +141,7 @@ def report_violation():
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
-# ✅ Final Submit and Scoring
+# Final Submit and Scoring
 @student_bp.route('/final-submit', methods=['POST'])
 def final_submit():
     data = request.get_json()
@@ -191,7 +191,7 @@ def final_submit():
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
-# ✅ Get Result
+# Get Result
 @student_bp.route('/result/<int:quiz_id>/<student_email>', methods=['GET'])
 def get_student_result(quiz_id, student_email):
     try:
@@ -226,7 +226,7 @@ def get_student_result(quiz_id, student_email):
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
-# ✅ Serve result UI page (after final submit)
+# Serve result UI page (after final submit)
 @student_bp.route('/view-result/<int:quiz_id>', methods=['GET'])
 def view_result_page(quiz_id):
     student_email = request.args.get("email")

@@ -1,4 +1,4 @@
-console.log("📘 student_result.js loaded");
+console.log("student_result.js loaded");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("resultContainer");
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loader.remove();
 
     if (!data.success) {
-      container.innerHTML = `<p class="cheated">❌ ${data.message}</p>`;
+      container.innerHTML = `<p class="cheated">${data.message}</p>`;
       return;
     }
 
@@ -21,14 +21,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       <p><strong>Email:</strong> ${data.student_email}</p>
       <p><strong>Score:</strong> <span class="highlight">${data.score}</span></p>
       <p>${data.cheating_detected 
-        ? `<span class="cheated">🚨 Cheating Detected</span><br/><small>Reason: ${data.reason}</small>` 
-        : `<span class="success">✅ No Cheating Detected</span>`}
+        ? `<span class="cheated">Cheating Detected</span><br/><small>Reason: ${data.reason}</small>` 
+        : `<span class="success">No Cheating Detected</span>`}
       </p>
     `;
     container.innerHTML = html;
 
   } catch (err) {
-    console.error("❌ Error loading result:", err);
-    container.innerHTML = `<p class="cheated">⚠️ Failed to load result.</p>`;
+    console.error("Error loading result:", err);
+    container.innerHTML = `<p class="cheated">Failed to load result.</p>`;
   }
 });

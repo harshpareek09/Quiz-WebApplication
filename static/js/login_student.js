@@ -1,11 +1,11 @@
-console.log("✅ Student JS Loaded");
+console.log("Student JS Loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("studentloginbtn");
   const msg = document.getElementById("message");
 
   if (!btn) {
-    console.error("❌ Student Login button not found");
+    console.error(" Student Login button not found");
     return;
   }
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const quiz_id = pathParts[pathParts.length - 1];
 
     if (!email || !full_name || !course) {
-      msg.textContent = "❗ All fields are required.";
+      msg.textContent = "All fields are required.";
       msg.style.color = "red";
       return;
     }
@@ -43,12 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
         msg.style.color = "lightgreen";
 
         if (result.already_attempted && result.redirect_url) {
-          msg.textContent = "ℹ️ You have already attempted this quiz. Redirecting to result...";
+          msg.textContent = "You have already attempted this quiz. Redirecting to result...";
           setTimeout(() => {
             window.location.href = result.redirect_url;
           }, 1500);
         } else {
-          msg.textContent = "✅ Login successful! Redirecting to quiz...";
+          msg.textContent = "Login successful! Redirecting to quiz...";
           setTimeout(() => {
             window.location.href = `/student/start-quiz/${quiz_id}?email=${encodeURIComponent(email)}`;
           }, 1500);
@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } else {
         msg.style.color = "red";
-        msg.textContent = `❌ ${result.message || "Invalid credentials"}`;
+        msg.textContent = `${result.message || "Invalid credentials"}`;
       }
     } catch (err) {
-      console.error("❌ Error in login:", err);
-      msg.textContent = "⚠️ Server error. Please try again later.";
+      console.error("Error in login:", err);
+      msg.textContent = "Server error. Please try again later.";
       msg.style.color = "red";
     }
   });
