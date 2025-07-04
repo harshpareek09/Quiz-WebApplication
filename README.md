@@ -64,9 +64,6 @@ result (result_id, student_id, quiz_id, score, cheated, reason)
 
 ⚙️ How to Run the Project
 
-Clone the repo:
-git clone https://github.com/yourusername/secure-quiz-app.git
-
 Set up virtual environment:
 python -m venv venv
 venv\Scripts\activate (Windows)
